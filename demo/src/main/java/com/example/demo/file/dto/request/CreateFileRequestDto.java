@@ -11,7 +11,4 @@ public class CreateFileRequestDto {
     private Long parentId;
     private String name;
     private FileEntity.FileType type;
-
-    // TODO: 유효성 검증 어노테이션 추가
 }
-

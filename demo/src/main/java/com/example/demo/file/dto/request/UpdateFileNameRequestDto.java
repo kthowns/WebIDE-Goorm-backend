@@ -7,7 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateFileNameRequestDto {
     private String name;
-
-    // TODO: 유효성 검증 어노테이션 추가
 }
 

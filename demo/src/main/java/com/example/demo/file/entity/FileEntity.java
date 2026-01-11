@@ -43,6 +43,46 @@ public class FileEntity {
         FILE, FOLDER
     }
 
-    // TODO: 생성자 및 비즈니스 로직 구현
+    // 파일/폴더 생성
+    public static FileEntity create(Long projectId, Long parentId, String name, FileType type) {
+        FileEntity file = new FileEntity();
+        file.projectId = projectId;
+        file.parentId = parentId; // null = 루트
+        file.name = name;
+        file.type = type;
+        file.isDeleted = false;
+        return file;
+    }
+
+    public void updateName(String name) {
+        this.name = name;
+        onUpdated();
+    }
+
+    public void delete() {
+        this.isDeleted = true;
+        onUpdated();
+    }
+
+    // 복원
+    public void restore() {
+        this.isDeleted = false;
+        onUpdated();
+    }
+
+    @PrePersist
+    protected void onCreated() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+        if (this.isDeleted == null) {
+            this.isDeleted = false;
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdated() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }
 

@@ -21,34 +21,33 @@ public class FileController {
 
     @PostMapping
     public ResponseEntity<FileResponseDto> createFile(@RequestBody CreateFileRequestDto requestDto) {
-        // TODO: 파일/폴더 생성 엔드포인트 구현
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        FileResponseDto response = fileService.createFile(requestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{fileId}")
     public ResponseEntity<FileResponseDto> getFile(@PathVariable Long fileId) {
-        // TODO: 파일 조회 엔드포인트 구현
-        return ResponseEntity.ok(null);
+        FileResponseDto response = fileService.getFile(fileId);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/project/{projectId}/tree")
     public ResponseEntity<List<FileTreeNodeDto>> getFileTree(@PathVariable Long projectId) {
-        // TODO: 파일 트리 조회 엔드포인트 구현
-        return ResponseEntity.ok(null);
+        List<FileTreeNodeDto> response = fileService.getFileTree(projectId);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{fileId}/name")
     public ResponseEntity<FileResponseDto> updateFileName(
             @PathVariable Long fileId,
             @RequestBody UpdateFileNameRequestDto requestDto) {
-        // TODO: 파일명 수정 엔드포인트 구현
-        return ResponseEntity.ok(null);
+        FileResponseDto response = fileService.updateFileName(fileId, requestDto);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{fileId}")
     public ResponseEntity<Void> deleteFile(@PathVariable Long fileId) {
-        // TODO: 파일 삭제 엔드포인트 구현
+        fileService.deleteFile(fileId);
         return ResponseEntity.noContent().build();
     }
 }
-

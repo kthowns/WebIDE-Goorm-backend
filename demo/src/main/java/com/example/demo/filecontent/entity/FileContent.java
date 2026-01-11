@@ -29,6 +29,17 @@ public class FileContent {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    // TODO: 생성자 및 비즈니스 로직 구현
-}
+    // 파일 내용 생성
+    public static FileContent create(Long fileId, String content, Integer version) {
+        FileContent fileContent = new FileContent();
+        fileContent.fileId = fileId;
+        fileContent.content = content;
+        fileContent.version = version;
+        return fileContent;
+    }
 
+    @PrePersist
+    protected void onCreated() {
+        this.updatedAt = LocalDateTime.now();
+    }
+}

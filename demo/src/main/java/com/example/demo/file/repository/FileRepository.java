@@ -5,15 +5,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
-    // TODO: 프로젝트별 파일 조회
+    // 프로젝트별 삭제되지 않은 파일 조회
     List<FileEntity> findByProjectIdAndIsDeletedFalse(Long projectId);
 
-    // TODO: 부모 폴더별 파일 조회
+    // 프로젝트의 루트 파일 조회
+    List<FileEntity> findByProjectIdAndParentIdIsNullAndIsDeletedFalse(Long projectId);
+
+    // 특정 부모의 자식 파일 조회
     List<FileEntity> findByParentIdAndIsDeletedFalse(Long parentId);
 
-    // TODO: 커스텀 쿼리 메서드 추가
+    // 파일 조회 (삭제되지 않은 것만)
+    Optional<FileEntity> findByIdAndIsDeletedFalse(Long id);
 }
 
