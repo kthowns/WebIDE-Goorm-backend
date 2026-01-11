@@ -18,7 +18,5 @@ public class FileTreeNodeDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<FileTreeNodeDto> children;
-
-    // TODO: 계층 구조 빌더 메서드 추가
 }
 

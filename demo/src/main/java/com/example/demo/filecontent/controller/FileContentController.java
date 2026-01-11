@@ -19,28 +19,27 @@ public class FileContentController {
 
     @PostMapping
     public ResponseEntity<FileContentResponseDto> saveFileContent(@RequestBody SaveFileContentRequestDto requestDto) {
-        // TODO: 파일 내용 저장 엔드포인트 구현
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+        FileContentResponseDto response = fileContentService.saveFileContent(requestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/file/{fileId}")
     public ResponseEntity<FileContentResponseDto> getFileContent(@PathVariable Long fileId) {
-        // TODO: 파일 내용 조회 엔드포인트 구현 (최신 버전)
-        return ResponseEntity.ok(null);
+        FileContentResponseDto response = fileContentService.getFileContent(fileId);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/file/{fileId}/version/{version}")
     public ResponseEntity<FileContentResponseDto> getFileContentByVersion(
             @PathVariable Long fileId,
             @PathVariable Integer version) {
-        // TODO: 특정 버전 파일 내용 조회 엔드포인트 구현
-        return ResponseEntity.ok(null);
+        FileContentResponseDto response = fileContentService.getFileContentByVersion(fileId, version);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/file/{fileId}/history")
     public ResponseEntity<List<FileContentResponseDto>> getFileContentHistory(@PathVariable Long fileId) {
-        // TODO: 파일 내용 버전 히스토리 조회 엔드포인트 구현
-        return ResponseEntity.ok(null);
+        List<FileContentResponseDto> response = fileContentService.getFileContentHistory(fileId);
+        return ResponseEntity.ok(response);
     }
 }
-
