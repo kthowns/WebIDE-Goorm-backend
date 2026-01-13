@@ -43,7 +43,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
-        working-directory: ${{ env.BUILD_DIR }}
         uses: docker/build-push-action@v4
         with:
           context: .
