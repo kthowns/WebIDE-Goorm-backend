@@ -21,6 +21,9 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
     // 파일 존재 여부 조회
     boolean existsByProjectIdAndParentIdAndNameAndIsDeletedFalse(Long projectId, Long parentId, String name);
 
+    // 파일 존재 여부 조회 (특정 ID 제외)
+    boolean existsByProjectIdAndParentIdAndNameAndIdNotAndIsDeletedFalse(Long projectId, Long parentId, String name, Long excludeId);
+
     // 파일 조회 (삭제되지 않은 것만)
     Optional<FileEntity> findByIdAndIsDeletedFalse(Long id);
 }
