@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+  env:
+    BUILD_DIR: ./demo
+
 jobs:
   build-deploy-main:
     runs-on: ubuntu-latest
@@ -23,9 +26,11 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Grant execute permission for gradlew
+        working-directory: ${{ env.BUILD_DIR }}
         run: chmod +x gradlew
 
       - name: Build with Gradle
+        working-directory: ${{ env.BUILD_DIR }}
         run: ./gradlew bootJar
 
       - name: Set up Docker Build
@@ -38,6 +43,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
+        working-directory: ${{ env.BUILD_DIR }}
         uses: docker/build-push-action@v4
         with:
           context: .
