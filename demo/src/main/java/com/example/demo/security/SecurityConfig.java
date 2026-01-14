@@ -41,15 +41,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/error", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                                .requestMatchers(
-                                        "/api/auth/**",
-                                        "/v3/api-docs/**",
-                                        "/swagger-ui/**",
-                                        "/swagger-ui.html"
-                                ).permitAll()
-                                .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
-                        //.anyRequest().permitAll() // 모든 요청 허용
+                        .requestMatchers("/error", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers(
+                                "/api/auth/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authAuthenticationEntryPoint));
