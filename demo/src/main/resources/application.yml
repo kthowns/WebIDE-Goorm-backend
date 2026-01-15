@@ -19,3 +19,7 @@ server:
 jwt:
   secret: ${JWT_SECRET}
   token-validity-in-seconds: ${JWT_EXPIRATION_SECONDS}
+execution:
+  docker:
+    python-image: python:3.11-alpine
+    java-image: eclipse-temurin:17-jdk
