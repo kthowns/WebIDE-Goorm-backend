@@ -54,6 +54,8 @@ public class SecurityConfig {
                                         "/ws/**",
                                         "/app/**"
                                 ).permitAll()
+                                // WebSocket 핸드셰이크는 JwtHandshakeInterceptor에서 인증 처리로 돌림
+                                .requestMatchers("/ws/**").permitAll()
                                 .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
                         //.anyRequest().permitAll() // 모든 요청 허용
 

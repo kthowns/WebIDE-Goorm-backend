@@ -36,3 +36,6 @@ logging:
   level:
     org.springframework.kafka: DEBUG
     com.example.demo.chat.consumer: DEBUG
+
+allowed:
+  origins: "*" # 여기 프론트엔드 도메인이 들어가야함.
