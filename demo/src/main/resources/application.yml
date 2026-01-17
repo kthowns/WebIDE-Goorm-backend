@@ -13,9 +13,26 @@ spring:
     hibernate:
       ddl-auto: update
 
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
 server:
   port: 8080
 
 jwt:
   secret: ${JWT_SECRET}
   token-validity-in-seconds: ${JWT_EXPIRATION_SECONDS}
+
+execution:
+  docker:
+    python-image: python:3.11-alpine
+    java-image: eclipse-temurin:17-jdk
