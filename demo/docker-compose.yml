@@ -22,10 +22,6 @@ services:
 
   spring:
     image: ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest
-    build:
-      context: .
-      dockerfile: Dockerfile
-
     container_name: grwebide-spring
     ports:
       - "8080:8080"
