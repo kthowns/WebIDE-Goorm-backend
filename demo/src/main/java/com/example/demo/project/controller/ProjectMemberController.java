@@ -1,5 +1,6 @@
 package com.example.demo.project.controller;
 
+import com.example.demo.common.SecurityUtil;
 import com.example.demo.project.dto.request.AddProjectMemberRequestDto;
 import com.example.demo.project.dto.response.ProjectMemberResponseDto;
 import com.example.demo.project.service.ProjectMemberService;
@@ -7,6 +8,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 public class ProjectMemberController {
 
     private final ProjectMemberService projectMemberService;
+    private final SecurityUtil securityUtil;
 
     @PostMapping
     public ResponseEntity<ProjectMemberResponseDto> addMember(
@@ -53,7 +56,8 @@ public class ProjectMemberController {
     @PostMapping("/join")
     public ResponseEntity<ProjectMemberResponseDto> joinByInviteCode(
             @RequestParam String inviteCode,
-            @RequestParam Long userId) {
+            Authentication authentication) {
+        Long userId = securityUtil.getUserIdFromAuthentication(authentication);
         ProjectMemberResponseDto response = projectMemberService.joinByInviteCode(inviteCode, userId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
